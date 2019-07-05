@@ -39,6 +39,7 @@
     "file",
     "http"
   ],
+  "alamode": true,
   "author": "Anton <anton@adc.sh>",
   "license": "MIT",
   "bugs": {
