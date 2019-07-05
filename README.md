@@ -13,7 +13,7 @@ yarn add @multipart/form
 - [Table Of Contents](#table-of-contents)
 - [API](#api)
 - [`class Form`](#class-form)
-  * [`constructor(opts: Config)`](#constructoropts-config-void)
+  * [`constructor(opts: Config): Form`](#constructoropts-config-form)
     * [`Config`](#type-config)
   * [`addSection(key: string, value: string)`](#addsectionkey-stringvalue-string-void)
   * [`async addFile(path: string, field: string, options: AddFileOptions?)`](#async-addfilepath-stringfield-stringoptions-addfileoptions-void)
@@ -37,7 +37,7 @@ import Form from '@multipart/form'
 
 The form class maintains an internal buffer with data that can be sent in a `multipart/form-data` request. It can append fields and files, and when a file path is given, it will be read from the file system and its contents will be added to the form data. It has the following methods:
 
-### `constructor(`<br/>&nbsp;&nbsp;`opts: Config,`<br/>`): void`
+### `constructor(`<br/>&nbsp;&nbsp;`opts: Config,`<br/>`): Form`
 
 __<a name="type-config">`Config`</a>__: Options for the constructor.
 
@@ -65,7 +65,7 @@ __<a name="type-addfileoptions">`AddFileOptions`</a>__: Options for adding files
 
 ### `get data`
 
-Adds the final `--{boundary}--` to the concatenated data.
+Concatenates the buffer data with `\r\n` and adds the final `--{boundary}--` to the returned string.
 
 ```js
 import Form from '@multipart/form'
@@ -77,7 +77,7 @@ import Form from '@multipart/form'
   console.log(form.data)
 })()
 ```
-```
+```http
 --u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh
 Content-Disposition: form-data; name="file"; filename="test/fixture/test.txt"
 Content-Type: application/octet-stream

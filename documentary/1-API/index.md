@@ -12,7 +12,7 @@ import Form from '@multipart/form'
 
 The form class maintains an internal buffer with data that can be sent in a `multipart/form-data` request. It can append fields and files, and when a file path is given, it will be read from the file system and its contents will be added to the form data. It has the following methods:
 
-```### constructor
+```### constructor => Form
 [
   ["opts", "Config"]
 ]
@@ -45,9 +45,9 @@ Reads the file from the disk and adds its content to the form. Once a file is re
 
 ### `get data`
 
-Adds the final `--{boundary}--` to the concatenated data.
+Concatenates the buffer data with `\r\n` and adds the final `--{boundary}--` to the returned string.
 
 %EXAMPLE: example, ../src => @multipart/form%
-%FORK example%
+%FORK-http example%
 
 %~%
