@@ -1,6 +1,6 @@
 {
   "name": "@multipart/form",
-  "version": "0.0.0-pre",
+  "version": "1.0.0",
   "description": "A Node.JS Class To Create Multipart/Form-Data Requests With Files and Fields.",
   "main": "build/index.js",
   "module": "src/index.js",
