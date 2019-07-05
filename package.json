@@ -31,7 +31,13 @@
   },
   "keywords": [
     "form",
-    "multipart"
+    "multipart",
+    "form-data",
+    "content-disposition",
+    "content-type",
+    "upload",
+    "file",
+    "http"
   ],
   "author": "Anton <anton@adc.sh>",
   "license": "MIT",
