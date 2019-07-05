@@ -1,5 +1,13 @@
 /* typal types/index.xml externs */
+/** @const */
+var _multipartForm = {}
 /**
- * @typedef {{ shouldRun: (boolean|undefined), text: string }}
+ * Options for the constructor.
+ * @typedef {{ boundary: (string|undefined) }}
  */
-var Config
+_multipartForm.Config
+/**
+ * Options for adding files.
+ * @typedef {{ type: (string|undefined), noCache: (boolean|undefined), filename: (string|undefined) }}
+ */
+_multipartForm.AddFileOptions

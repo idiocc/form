@@ -1,9 +1,8 @@
-/* alanode example/ */
-import form from '../src'
+import Form from '../src'
 
 (async () => {
-  const res = await form({
-    text: 'example',
-  })
-  console.log(res)
+  const form = new Form()
+  await form.addFile(`test/fixture/test.txt`, 'file')
+  form.addSection('hello', 'world')
+  console.log(form.data)
 })()

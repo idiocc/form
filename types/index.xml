@@ -1,10 +1,18 @@
-<types namespace="_@multipart/form">
-  <type name="Config" desc="Options for the program.">
-    <prop boolean name="shouldRun" default="true">
-      A boolean option.
+<types namespace="_multipartForm">
+  <type name="Config" desc="Options for the constructor.">
+    <prop string name="boundary" default="u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh">
+      The hard-coded boundary for the requests.
     </prop>
-    <prop string name="text">
-      A text to return.
+  </type>
+  <type name="AddFileOptions" desc="Options for adding files.">
+    <prop string name="type" default="application/octet-stream">
+      The _Content-Type_ description.
+    </prop>
+    <prop boolean name="noCache" default="false">
+      Whether to not cache read files.
+    </prop>
+    <prop string opt name="filename">
+      The `filename` property for _Content-Disposition_ description. By default, will be same as the `path` argument.
     </prop>
   </type>
 </types>

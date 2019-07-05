@@ -1,0 +1,12 @@
+
+--u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh
+Content-Disposition: form-data; name="file"; filename="test/fixture/test.txt"
+Content-Type: application/octet-stream
+
+a test file
+
+--u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh
+Content-Disposition: form-data; name="hello"
+
+world
+--u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh--
