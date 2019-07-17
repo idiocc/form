@@ -1,0 +1,17 @@
+<types namespace="_multipartForm">
+  <type interface name="Form" desc="Accumulates data in fields and returns the complete body.">
+    <prop type="function(string, string, !_multipartForm.AddFileOptions)"
+      name="addFile">
+      Reads and adds the file to the request buffer.
+    </prop>
+    <prop type="function(string, (!Buffer|string))" name="addSection">
+      Adds a key-value pair to the form.
+    </prop>
+    <prop type="!Buffer" name="buffer">
+      The data to send.
+    </prop>
+    <prop type="string" name="data">
+      The data to send as utf-8 string.
+    </prop>
+  </type>
+</types>

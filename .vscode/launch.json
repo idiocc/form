@@ -11,6 +11,8 @@
       "program": "${workspaceFolder}/node_modules/.bin/zoroaster",
       "env": {
         "NODE_DEBUG": "@multipart/form",
+        "DEBUG": "@multipart/form",
+        "ALAMODE_ENV": "test-compile",
       },
       "console": "integratedTerminal",
       "args": [

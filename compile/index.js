@@ -1,26 +1,13 @@
-import { readBuffer } from '@wrote/read'
-import Debug from '@idio/debug'
+const _Form = require('./form')
 
-const debug=Debug('@multipart/form')
-
-/**
- * @implements {_multipartForm.Form}
- */
-export default class Form {
+class Form extends _Form {
   /**
    * Creates a new form instance that maintains a buffer of key-value pairs and files separated by a boundary.
    * @param {_multipartForm.Config} [opts] Options for the constructor.
    * @param {string} [opts.boundary="u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh"] The hard-coded boundary for the requests. Default `u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh`.
    */
   constructor(opts = {}) {
-    const {
-      boundary = 'u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh',
-    } = opts
-    /**
-     * @type {!Array<!Buffer>}
-     */
-    this._data = []
-    this._boundary = boundary
+    super(opts)
   }
   /**
    * @param {string} path The path to the file.
@@ -30,62 +17,21 @@ export default class Form {
    * @param {boolean} [options.noCache=false] Whether to not cache read files. Default `false`.
    * @param {string} [options.filename] The `filename` property for _Content-Disposition_ description. By default, will be same as the `path` argument.
    */
-  async addFile(path, name, options = {}) {
-    const {
-      contentType = 'application/octet-stream',
-      noCache = false,
-      filename = path,
-    } = options
-    let file
-    if (path in formCache || noCache) {
-      file = formCache[path]
-    } else {
-      file = await readBuffer(path)
-      if (!noCache) formCache[path] = file
-    }
-    const disposition = [
-      'form-data',
-      `name="${name}"`,
-      `filename="${filename}"`,
-    ].join('; ')
-    this.writeLine(`\r\n--${this.boundary}`)
-    this.writeLine(`Content-Disposition: ${disposition}`)
-    this.writeLine(`Content-Type: ${contentType}`)
-    this.writeLine()
-    this._data.push(file)
-  }
-  writeLine(line = null, encoding = 'ascii') {
-    if (line)
-      this._data.push(typeof line == 'string' ? Buffer.from(line, encoding) : line)
-
-    this._data.push(Buffer.from('\r\n', encoding))
-  }
-  /**
-   * The boundary.
-   */
-  get boundary() {
-    return this._boundary
+  addFile(path, name, options = {}) {
+    return super.addFile(path, name, options)
   }
   /**
    * The complete data as a string.
+   * @returns {string}
    */
   get data() {
-    let b = this.buffer
-    debug('converting to string')
-    b = b.toString()
-    debug('string is %f', b.length)
-    return b
+    return super.data
   }
   /**
-   * The complete data as Buffer.
+   * Writes the final line to the buffer array and returns the concatenated request body.
    */
   get buffer() {
-    debug('adding final --boundary-- and calling Buffer.concat')
-    this.writeLine(`\r\n--${this.boundary}--`)
-
-    let b= Buffer.concat(this._data)
-    debug('buffer is %f', b.length)
-    return b
+    return super.buffer
   }
   /**
    * Adds a key-value pair to the form.
@@ -93,16 +39,13 @@ export default class Form {
    * @param {!Buffer|string} value The value for the key.
    */
   addSection(key, value) {
-    this.writeLine(`\r\n--${this.boundary}`)
-    this.writeLine(`Content-Disposition: form-data; name="${key}"`)
-    this.writeLine()
-    this._data.push(value instanceof Buffer ? value : Buffer.from(value))
+    return super.addSection(key, value)
   }
 }
 
-const formCache = {}
+module.exports = Form
 
-/* typal types/index.xml closure */
+/* typal types/index.xml */
 /**
  * @suppress {nonStandardJsDocs}
  * @typedef {_multipartForm.Config} Config Options for the constructor.
