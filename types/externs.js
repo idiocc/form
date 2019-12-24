@@ -31,7 +31,7 @@ _multipart.Form = function(config) {}
  */
 _multipart.Form.prototype.buffer
 /**
- * The data to send as utf-8 string.
+ * The data to send as utf-8 string. Concatenates the buffer data with `\r\n` and adds the final `--{boundary}--` to the returned string.
  * @type {string}
  */
 _multipart.Form.prototype.data

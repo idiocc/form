@@ -5,19 +5,19 @@ const stream = require('stream');
 const os = require('os');
 const tty = require('tty');
 const util = require('util');             
-const {createReadStream:m} = fs;
-const {Writable:p} = stream;
-const q = (a, b = 0, c = !1) => {
+const m = fs.createReadStream;
+const n = stream.Writable;
+const p = (a, b = 0, c = !1) => {
   if (0 === b && !c) {
     return a;
   }
   a = a.split("\n", c ? b + 1 : void 0);
   return c ? a[a.length - 1] : a.slice(b).join("\n");
-}, r = (a, b = !1) => q(a, 2 + (b ? 1 : 0)), t = a => {
+}, q = (a, b = !1) => p(a, 2 + (b ? 1 : 0)), t = a => {
   ({callee:{caller:a}} = a);
   return a;
 };
-const {homedir:u} = os;
+const u = os.homedir;
 const v = /\s+at.*(?:\(|\s)(.*)\)?/, w = /^(?:(?:(?:node|(?:internal\/[\w/]*|.*node_modules\/(?:IGNORED_MODULES)\/.*)?\w+)\.js:\d+:\d+)|native)/, x = u(), y = a => {
   const {pretty:b = !1, ignoredModules:c = ["pirates"]} = {}, e = new RegExp(w.source.replace("IGNORED_MODULES", c.join("|")));
   return a.replace(/\\/g, "/").split("\n").filter(d => {
@@ -32,7 +32,7 @@ const v = /\s+at.*(?:\(|\s)(.*)\)?/, w = /^(?:(?:(?:node|(?:internal\/[\w/]*|.*n
 function z(a, b, c = !1) {
   return function(e) {
     var d = t(arguments), {stack:g} = Error();
-    const f = q(g, 2, !0), k = (g = e instanceof Error) ? e.message : e;
+    const f = p(g, 2, !0), k = (g = e instanceof Error) ? e.message : e;
     d = [`Error: ${k}`, ...null !== d && a === d || c ? [b] : [f, b]].join("\n");
     d = y(d);
     return Object.assign(g ? e : Error(), {message:k, stack:d});
@@ -41,7 +41,7 @@ function z(a, b, c = !1) {
 ;function A(a) {
   var {stack:b} = Error();
   const c = t(arguments);
-  b = r(b, a);
+  b = q(b, a);
   return z(c, b, a);
 }
 ;const B = (a, b) => {
@@ -50,32 +50,29 @@ function z(a, b, c = !1) {
   });
   return b;
 };
-class C extends p {
+class C extends n {
   constructor(a) {
-    var b = a || {}, c = Object.assign({}, b);
-    const e = void 0 === b.binary ? !1 : b.binary, d = void 0 === b.rs ? null : b.rs;
-    b = (delete c.binary, delete c.rs, c);
-    const {j:g = A(!0), proxyError:f} = a || {}, k = (n, l) => g(l);
-    super(b);
+    const {binary:b = !1, rs:c = null, ...e} = a || {}, {j:d = A(!0), proxyError:g} = a || {}, f = (k, l) => d(l);
+    super(e);
     this.a = [];
-    this.h = new Promise((n, l) => {
+    this.h = new Promise((k, l) => {
       this.on("finish", () => {
         let h;
-        e ? h = Buffer.concat(this.a) : h = this.a.join("");
-        n(h);
+        b ? h = Buffer.concat(this.a) : h = this.a.join("");
+        k(h);
         this.a = [];
       });
       this.once("error", h => {
         if (-1 == h.stack.indexOf("\n")) {
-          k`${h}`;
+          f`${h}`;
         } else {
-          const N = y(h.stack);
-          h.stack = N;
-          f && k`${h}`;
+          const r = y(h.stack);
+          h.stack = r;
+          g && f`${h}`;
         }
         l(h);
       });
-      d && B(this, d).pipe(this);
+      c && B(this, c).pipe(this);
     });
   }
   _write(a, b, c) {
@@ -87,9 +84,7 @@ class C extends p {
   }
 }
 const D = async a => {
-  var b = {binary:!0};
-  b = void 0 === b ? {} : b;
-  ({c:a} = new C(Object.assign({}, {rs:a}, b, {j:A(!0)})));
+  ({c:a} = new C({rs:a, binary:!0, j:A(!0)}));
   return await a;
 };
 async function E(a) {
@@ -97,7 +92,7 @@ async function E(a) {
   return await D(a);
 }
 ;var F = tty;
-const {format:G, inspect:H} = util;
+const G = util.format, H = util.inspect;
 /*
 
  Copyright (c) 2016 Zeit, Inc.
@@ -168,14 +163,14 @@ function K(a, b, c, e) {
  Copyright(c) 2015 Jed Watson
  MIT Licensed
 */
-const L = /\B(?=(\d{3})+(?!\d))/g, M = /(?:\.0*|(\.[^0]+)0+)$/, O = {b:1, kb:1024, mb:1048576, gb:1073741824, tb:Math.pow(1024, 4), pb:Math.pow(1024, 5)};
-function P(a, b) {
+const L = /\B(?=(\d{3})+(?!\d))/g, M = /(?:\.0*|(\.[^0]+)0+)$/, N = {b:1, kb:1024, mb:1048576, gb:1073741824, tb:Math.pow(1024, 4), pb:Math.pow(1024, 5)};
+function O(a, b) {
   if (!Number.isFinite(a)) {
     return null;
   }
   const c = Math.abs(a), e = b && b.s || "", d = b && b.v || "", g = b && void 0 !== b.i ? b.i : 2, f = !(!b || !b.l);
-  (b = b && b.u || "") && O[b.toLowerCase()] || (b = c >= O.pb ? "PB" : c >= O.tb ? "TB" : c >= O.gb ? "GB" : c >= O.mb ? "MB" : c >= O.kb ? "KB" : "B");
-  a = (a / O[b.toLowerCase()]).toFixed(g);
+  (b = b && b.u || "") && N[b.toLowerCase()] || (b = c >= N.pb ? "PB" : c >= N.tb ? "TB" : c >= N.gb ? "GB" : c >= N.mb ? "MB" : c >= N.kb ? "KB" : "B");
+  a = (a / N[b.toLowerCase()]).toFixed(g);
   f || (a = a.replace(M, "$1"));
   e && (a = a.replace(L, e));
   return a + d + b;
@@ -185,74 +180,67 @@ function P(a, b) {
  BSD License
  Copyright (c) 2009-2015, Kevin Decker <kpdecker@gmail.com>
 */
-const Q = {black:30, red:31, green:32, yellow:33, blue:34, magenta:35, cyan:36, white:37, grey:90};
-function R(a, b) {
-  return (b = Q[b]) ? `\x1b[${b}m${a}\x1b[0m` : a;
+const P = {black:30, red:31, green:32, yellow:33, blue:34, magenta:35, cyan:36, white:37, grey:90};
+function Q(a, b) {
+  return (b = P[b]) ? `\x1b[${b}m${a}\x1b[0m` : a;
 }
-;var S = {f:P, ["fy"](a) {
-  return R(P(a) || "", "yellow");
+;var R = {f:O, ["fy"](a) {
+  return Q(O(a) || "", "yellow");
 }, ["fr"](a) {
-  return R(P(a) || "", "red");
+  return Q(O(a) || "", "red");
 }, ["fb"](a) {
-  return R(P(a) || "", "blue");
+  return Q(O(a) || "", "blue");
 }, ["fg"](a) {
-  return R(P(a) || "", "green");
+  return Q(O(a) || "", "green");
 }, ["fc"](a) {
-  return R(P(a) || "", "cyan");
+  return Q(O(a) || "", "cyan");
 }, ["fm"](a) {
-  return R(P(a) || "", "magenta");
+  return Q(O(a) || "", "magenta");
 }};
-const T = Object.keys(process.env).filter(a => /^debug_/i.test(a)).reduce((a, b) => {
+const S = Object.keys(process.env).filter(a => /^debug_/i.test(a)).reduce((a, b) => {
   const c = b.substring(6).toLowerCase().replace(/_([a-z])/g, (e, d) => d.toUpperCase());
   b = process.env[b];
   /^(yes|on|true|enabled)$/i.test(b) ? b = !0 : /^(no|off|false|disabled)$/i.test(b) ? b = !1 : "null" === b ? b = null : b = Number(b);
   a[c] = b;
   return a;
-}, {}), U = Object.assign({}, {o:function(a) {
-  const b = Object.assign({}, this.inspectOpts, {colors:this.useColors});
-  return H(a, b).replace(/\s*\n\s*/g, " ");
-}, O:function(a) {
-  const b = Object.assign({}, this.inspectOpts, {colors:this.useColors});
-  return H(a, b);
-}}, S), V = {init:function(a) {
-  a.inspectOpts = Object.assign({}, T);
+}, {}), T = {init:function(a) {
+  a.inspectOpts = {...S};
 }, log:function(...a) {
   return process.stderr.write(G(...a) + "\n");
 }, formatArgs:function(a) {
-  const {namespace:b, useColors:c, color:e, diff:d} = this;
-  if (c) {
-    const g = "\u001b[3" + (8 > e ? e : "8;5;" + e), f = `  ${g};1m${b} \u001B[0m`;
-    a[0] = f + a[0].split("\n").join("\n" + f);
-    a.push(g + "m+" + I(d) + "\u001b[0m");
-  } else {
-    a[0] = (T.hideDate ? "" : (new Date).toISOString() + " ") + b + " " + a[0];
-  }
+  var b = this.namespace, c = this.color;
+  const e = this.diff;
+  this.useColors ? (c = "\u001b[3" + (8 > c ? c : "8;5;" + c), b = `  ${c};1m${b} \u001B[0m`, a[0] = b + a[0].split("\n").join("\n" + b), a.push(c + "m+" + I(e) + "\u001b[0m")) : a[0] = (S.hideDate ? "" : (new Date).toISOString() + " ") + b + " " + a[0];
 }, save:function(a) {
   a ? process.env.DEBUG = a : delete process.env.DEBUG;
 }, load:function() {
   return process.env.DEBUG;
 }, useColors:function() {
-  return "colors" in T ? !!T.colors : F.isatty(process.stderr.fd);
-}, colors:[6, 2, 3, 4, 5, 1], inspectOpts:T, formatters:U};
-function W(a) {
+  return "colors" in S ? !!S.colors : F.isatty(process.stderr.fd);
+}, colors:[6, 2, 3, 4, 5, 1], inspectOpts:S, formatters:{o:function(a) {
+  return H(a, {...this.inspectOpts, colors:this.useColors}).replace(/\s*\n\s*/g, " ");
+}, O:function(a) {
+  return H(a, {...this.inspectOpts, colors:this.useColors});
+}, ...R}};
+function U(a) {
   function b(...f) {
     if (b.enabled) {
       var k = Number(new Date);
       b.diff = k - (g || k);
       b.prev = g;
       g = b.curr = k;
-      f[0] = aa(f[0]);
+      f[0] = V(f[0]);
       "string" != typeof f[0] && f.unshift("%O");
-      var n = 0;
-      f[0] = f[0].replace(/%([a-zA-Z%]+)/g, (l, h) => {
-        if ("%%" == l) {
-          return l;
+      var l = 0;
+      f[0] = f[0].replace(/%([a-zA-Z%]+)/g, (h, r) => {
+        if ("%%" == h) {
+          return h;
         }
-        n++;
-        if (h = c[h]) {
-          l = h.call(b, f[n]), f.splice(n, 1), n--;
+        l++;
+        if (r = c[r]) {
+          h = r.call(b, f[l]), f.splice(l, 1), l--;
         }
-        return l;
+        return h;
       });
       e.call(b, f);
       (b.log || d).apply(b, f);
@@ -262,21 +250,21 @@ function W(a) {
   let g;
   return b;
 }
-function ba(a) {
-  const b = W(a);
+function W(a) {
+  const b = U(a);
   "function" == typeof a.init && a.init(b);
   a.a.push(b);
   return b;
 }
-function ca(a, b) {
+function aa(a, b) {
   let c = 0;
   for (let e = 0; e < b.length; e++) {
     c = (c << 5) - c + b.charCodeAt(e), c |= 0;
   }
   return a.colors[Math.abs(c) % a.colors.length];
 }
-function da(a) {
-  var b = V.load();
+function ba(a) {
+  var b = T.load();
   a.save(b);
   a.c = [];
   a.g = [];
@@ -289,7 +277,7 @@ function da(a) {
     b = a.a[c], b.enabled = a.enabled(b.namespace);
   }
 }
-class ea {
+class ca {
   constructor(a) {
     this.colors = a.colors;
     this.formatArgs = a.formatArgs;
@@ -326,18 +314,18 @@ class ea {
     return !1;
   }
 }
-function aa(a) {
+function V(a) {
   return a instanceof Error ? a.stack || a.message : a;
 }
 ;var X;
 X = function() {
-  const a = new ea(V);
+  const a = new ca(T);
   return function(b) {
-    const c = ba(a);
+    const c = W(a);
     c.namespace = b;
-    c.useColors = V.useColors();
+    c.useColors = T.useColors();
     c.enabled = a.enabled(b);
-    c.color = ca(a, b);
+    c.color = aa(a, b);
     c.destroy = function() {
       a.destroy(this);
     };
@@ -346,15 +334,15 @@ X = function() {
       e.log = this.log;
       return e;
     };
-    da(a);
+    ba(a);
     return c;
   };
 }()("@multipart/form");
 function Y(a, b = null) {
-  b && a.a.push("string" == typeof b ? Buffer.from(b, "ascii") : b);
-  a.a.push(Buffer.from("\r\n", "ascii"));
+  b && a.a.push("string" == typeof b ? Buffer.from(b, "utf8") : b);
+  a.a.push(Buffer.from("\r\n", "utf8"));
 }
-class fa {
+class da {
   constructor(a = {}) {
     ({boundary:a = "u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh"} = a);
     this.a = [];
@@ -395,7 +383,7 @@ class fa {
   }
 }
 const Z = {};
-module.exports = fa;
+module.exports = da;
 
 
 //# sourceMappingURL=form.js.map

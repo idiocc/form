@@ -4,12 +4,12 @@ import Debug from '@idio/debug'
 const debug=Debug('@multipart/form')
 
 /**
- * @implements {_multipartForm.Form}
+ * @implements {_multipart.Form}
  */
 export default class Form {
   /**
    * Creates a new form instance that maintains a buffer of key-value pairs and files separated by a boundary.
-   * @param {_multipartForm.Config} [opts] Options for the constructor.
+   * @param {_multipart.FormConfig} [opts] Options for the constructor.
    * @param {string} [opts.boundary="u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh"] The hard-coded boundary for the requests. Default `u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh`.
    */
   constructor(opts = {}) {
@@ -25,7 +25,7 @@ export default class Form {
   /**
    * @param {string} path The path to the file.
    * @param {string} name The name of the field.
-   * @param {_multipartForm.AddFileOptions} [options] Options for adding files.
+   * @param {_multipart.AddFileOptions} [options] Options for adding files.
    * @param {string} [options.type="application/octet-stream"] The _Content-Type_ description. Default `application/octet-stream`.
    * @param {boolean} [options.noCache=false] Whether to not cache read files. Default `false`.
    * @param {string} [options.filename] The `filename` property for _Content-Disposition_ description. By default, will be same as the `path` argument.
@@ -54,7 +54,7 @@ export default class Form {
     this.writeLine()
     this._data.push(file)
   }
-  writeLine(line = null, encoding = 'ascii') {
+  writeLine(line = null, encoding = 'utf8') {
     if (line)
       this._data.push(typeof line == 'string' ? Buffer.from(line, encoding) : line)
 
@@ -105,20 +105,20 @@ const formCache = {}
 /* typal types/index.xml closure */
 /**
  * @suppress {nonStandardJsDocs}
- * @typedef {_multipartForm.Config} Config Options for the constructor.
+ * @typedef {_multipart.Config} Config Options for the constructor.
  */
 /**
  * @suppress {nonStandardJsDocs}
- * @typedef {Object} _multipartForm.Config Options for the constructor.
+ * @typedef {Object} _multipart.Config Options for the constructor.
  * @prop {string} [boundary="u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh"] The hard-coded boundary for the requests. Default `u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh`.
  */
 /**
  * @suppress {nonStandardJsDocs}
- * @typedef {_multipartForm.AddFileOptions} AddFileOptions Options for adding files.
+ * @typedef {_multipart.AddFileOptions} AddFileOptions Options for adding files.
  */
 /**
  * @suppress {nonStandardJsDocs}
- * @typedef {Object} _multipartForm.AddFileOptions Options for adding files.
+ * @typedef {Object} _multipart.AddFileOptions Options for adding files.
  * @prop {string} [type="application/octet-stream"] The _Content-Type_ description. Default `application/octet-stream`.
  * @prop {boolean} [noCache=false] Whether to not cache read files. Default `false`.
  * @prop {string} [filename] The `filename` property for _Content-Disposition_ description. By default, will be same as the `path` argument.

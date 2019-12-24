@@ -11,7 +11,7 @@
     "mask": "yarn t test/mask",
     "test-build": "ALAMODE_ENV=test-build yarn test",
     "test-compile": "ALAMODE_ENV=test-compile yarn test",
-    "compile": "depack src/depack.js -o compile/form.js -a -p -c -s --source_map_include_content",
+    "lib": "depack src/depack.js -o compile/form.js -a -p -c -s --source_map_include_content",
     "lint": "eslint .",
     "doc": "doc -o README.md -n _multipart -d -a",
     "d": "yarn-s template d1 externs",
@@ -52,7 +52,9 @@
     "@idio/debug": "^1.2.3",
     "@wrote/read": "^1.0.4",
     "alamode": "^3.3.0",
+    "depack": "^1.0.1",
     "documentary": "^1.35.8",
+    "erte": "^1.2.0",
     "eslint-config-artdeco": "1.0.1",
     "yarn-s": "1.2.1",
     "zoroaster": "^4.1.2"
