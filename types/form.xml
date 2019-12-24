@@ -1,17 +1,29 @@
-<types namespace="_multipartForm">
-  <type interface name="Form" desc="Accumulates data in fields and returns the complete body.">
-    <prop type="function(string, string, !_multipartForm.AddFileOptions)"
-      name="addFile">
+<types namespace="_multipart">
+  <interface name="Form" desc="Accumulates data in fields and returns the complete body.">
+    <fn name="constructor">
+      <arg type="!_multipart.FormConfig" name="config">
+        The configuration object.
+      </arg>
+      Creates a new form instance that maintains a buffer of key-value pairs and files separated by a boundary.
+    </fn>
+    <fn void name="addFile">
+      <arg string name="path">The path to the file to read and add.</arg>
+      <arg string name="name">The filename.</arg>
+      <arg type="!_multipart.AddFileOptions" name="options" opt>
+        The options.
+      </arg>
       Reads and adds the file to the request buffer.
-    </prop>
-    <prop type="function(string, (!Buffer|string))" name="addSection">
+    </fn>
+    <fn name="addSection">
+      <arg string name="key">The key to add.</arg>
+      <arg type="!Buffer|string" name="value">The value.</arg>
       Adds a key-value pair to the form.
-    </prop>
+    </fn>
     <prop type="!Buffer" name="buffer">
       The data to send.
     </prop>
-    <prop type="string" name="data">
+    <prop string name="data">
       The data to send as utf-8 string.
     </prop>
-  </type>
+  </interface>
 </types>

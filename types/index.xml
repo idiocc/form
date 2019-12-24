@@ -1,5 +1,5 @@
-<types namespace="_multipartForm">
-  <type name="Config" desc="Options for the constructor.">
+<types namespace="_multipart">
+  <type name="FormConfig" desc="Options for the constructor.">
     <prop string name="boundary" default="u2KxIV5yF1y+xUspOQCCZopaVgeV6Jxihv35XQJmuTx8X3sh">
       The hard-coded boundary for the requests.
     </prop>
