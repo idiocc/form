@@ -1,0 +1,14 @@
+{
+  "_multipart.Form": {
+    "link": "https://github.com/idiocc/form#type-form",
+    "description": "Accumulates data in fields and returns the complete body."
+  },
+  "_multipart.FormConfig": {
+    "link": "https://github.com/idiocc/form#type-formconfig",
+    "description": "Options for the constructor."
+  },
+  "_multipart.AddFileOptions": {
+    "link": "https://github.com/idiocc/form#type-addfileoptions",
+    "description": "Options for adding files."
+  }
+}

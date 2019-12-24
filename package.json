@@ -21,7 +21,6 @@
     "e": "alanode"
   },
   "files": [
-    "build",
     "src",
     "compile",
     "types/externs.js"
@@ -31,6 +30,7 @@
     "type": "git",
     "url": "git://github.com/idiocc/form.git"
   },
+  "typedefs": "typedefs.json",
   "keywords": [
     "form",
     "multipart",
@@ -43,11 +43,11 @@
   ],
   "alamode": true,
   "author": "Anton <anton@adc.sh>",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/idiocc/form/issues"
   },
-  "homepage": "https://github.com/idiocc/form#readme",
+  "homepage": "https://www.idio.cc",
   "devDependencies": {
     "@idio/debug": "^1.2.3",
     "@wrote/read": "^1.0.4",
