@@ -87,7 +87,7 @@ __<a name="type-form">`Form`</a>__: Accumulates data in fields and returns the c
  </tr>
  <tr>
   <td rowSpan="3" align="center"><ins>addSection</ins></td>
-  <td><em>(key: string, value: (!Buffer | string)) => ?</em></td>
+  <td><em>(key: string, value: (!Buffer | string)) => void</em></td>
  </tr>
  <tr></tr>
  <tr>
@@ -96,6 +96,7 @@ __<a name="type-form">`Form`</a>__: Accumulates data in fields and returns the c
   </td>
  </tr>
 </table>
+
 __<a name="type-formconfig">`FormConfig`</a>__: Options for the constructor.
 
 

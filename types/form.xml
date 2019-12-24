@@ -14,7 +14,7 @@
       </arg>
       Reads and adds the file to the request buffer.
     </fn>
-    <fn name="addSection">
+    <fn name="addSection" void>
       <arg string name="key">The key to add.</arg>
       <arg type="!Buffer|string" name="value">The value.</arg>
       Adds a key-value pair to the form.
